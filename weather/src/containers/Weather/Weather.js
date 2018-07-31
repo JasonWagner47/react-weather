@@ -1,5 +1,24 @@
 import React, { Component } from 'react';
-import axios from '../../axios';
 import Card from '../../components/Card/Card';
-import NewCard from '../../components/NewCard/NewCard';
-import './Weather.css';
+// import NewCard from '../../components/NewCard/NewCard';
+// import './Weather.css';
+
+class Weather extends Component {
+    state = {
+        error: false
+    }
+
+    componentDidMount () {
+       
+    }
+    
+    render () {
+        return (
+            <div> Yo
+                <Card />
+            </div>
+        );
+    }
+}
+
+export default Weather;
