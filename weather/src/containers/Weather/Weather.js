@@ -45,7 +45,8 @@ class Weather extends Component {
                 key={post.dt} 
                 current={post.main.temp}
                 high={post.main.temp_max} 
-                low={post.main.temp_min}/>;
+                low={post.main.temp_min}
+                conditions={post.weather[0].description}/>;
             });
     
         }
