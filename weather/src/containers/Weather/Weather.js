@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Post from '../../components/Post/Post';
+import Forecast from '../../components/Forecast/Forecast';
 import moment from 'moment';
 
 const city = 'Denver';
 const country ='USA';
 const ApiKey = '1c198b3372d8bdb9aa90f8308847b060';
 
-
 class Weather extends Component {
     state = {
         posts: [],
+        forecasts: [],
         error: false
     }
     //lifecycle hook
@@ -21,18 +21,19 @@ class Weather extends Component {
         //promise
         .then(response => {
            
-            //todo ... add limit to response here with slice after conversion
-           
-            const posts = response.data.list.slice(0, 4);
-            const updatedPosts = posts.map(post => {
-                return {
-                    ...post,
-                }
-            });
+            const posts = response.data.list;
+            const forecasts= [];
 
-            console.log(updatedPosts);
-          
-            this.setState({posts: updatedPosts});
+            for (let i = 0; i < posts.length; i++){
+
+                if (i % 8 === 0){
+                    forecasts.push(posts[i]);
+                } 
+            }
+
+            console.log(forecasts);
+
+            this.setState({forecasts: forecasts});
                 //do something
             } )
             .catch(error => {
@@ -42,32 +43,31 @@ class Weather extends Component {
     }
 
     render () {
-        let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+        let forecasts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
         if (!this.state.error) {
-            posts = this.state.posts.map(post => {
-                const day = moment.unix(post.dt);
-                return <Post
+            forecasts = this.state.forecasts.map(forecast => {
+                const day = moment.unix(forecast.dt);
+                return <Forecast
                 
-                key={post.dt}
+                key={forecast.dt}
                 day={day.format('dddd h:mm A')}
-                current={post.main.temp}
-                high={post.main.temp_max} 
-                low={post.main.temp_min}
-                conditions={post.weather[0].description}
-                icon={post.weather[0].icon}/>; 
+                doomsday={forecast.main.temp  + 10}
+                high={forecast.main.temp_max} 
+                low={forecast.main.temp_min}
+                conditions={forecast.weather[0].description}
+                icon={forecast.weather[0].icon}/>; 
             });
     
         }
-        //not a fan of the obligatory div, but C'est la vie
-
         return (
             <div className="Container">
-              {posts}
+            <h1>
+              {forecasts}
+            </h1>
             </div>
      
         );
     }
-
 }
 
 export default Weather;
