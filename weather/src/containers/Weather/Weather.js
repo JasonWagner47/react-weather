@@ -50,7 +50,7 @@ class Weather extends Component {
                 return <Forecast
                 
                 key={forecast.dt}
-                day={day.format('dddd h:mm A')}
+                day={day.format('dddd')}
                 doomsday={forecast.main.temp  + 10}
                 high={forecast.main.temp_max} 
                 low={forecast.main.temp_min}
