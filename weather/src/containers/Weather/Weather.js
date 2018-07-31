@@ -13,7 +13,7 @@ class Weather extends Component {
     }
     //lifecycle hook
     componentDidMount () {
-        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',' + country + '&appid=' + ApiKey)
+        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',' + country + '&units=imperial&appid=' + ApiKey)
       
         //promise
         .then(response => {
@@ -52,7 +52,7 @@ class Weather extends Component {
         //not a fan of the obligatory div, but C'est la vie
 
         return (
-            <div>
+            <div className="Container">
               {posts}
             </div>
      
