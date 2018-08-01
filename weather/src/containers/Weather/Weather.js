@@ -21,7 +21,7 @@ class Weather extends Component {
     //toDo lifecycle hook
     getWeather = async (e) => {
         e.preventDefault();
-        this.setState({error: false});
+         this.setState({error: false});
 
         axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + e.target.elements.city.value + ',' + country + '&units=imperial&appid=' + ApiKey)
        
@@ -51,7 +51,10 @@ class Weather extends Component {
             } )
             .catch(error => {
                 console.log('[this is the error] ' + error);
-                this.setState({error: true});
+                this.setState({
+                    error: true,
+                    location: ''
+                });
             });
     }
 
