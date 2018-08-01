@@ -13,7 +13,8 @@ class Weather extends Component {
     state = {
         posts: [],
         forecasts: [],
-        city: 'Denver',
+        city: null,
+        location: '',
         error: false
     }
 
@@ -21,13 +22,10 @@ class Weather extends Component {
     getWeather = async (e) => {
         e.preventDefault();
 
-        const city = e.target.elements.city.value;
 
-        this.setState({
-            city: city
-        });
+ 
 
-        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.state.city + ',' + country + '&units=imperial&appid=' + ApiKey)
+        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + e.target.elements.city.value + ',' + country + '&units=imperial&appid=' + ApiKey)
        
 
         //promise
@@ -37,6 +35,9 @@ class Weather extends Component {
             const location = response.data.city.name;
             const forecasts= [];
 
+            this.setState({
+                location: location
+            });
             console.log(location);
 
             for (let i = 0; i < posts.length; i++){
@@ -51,8 +52,6 @@ class Weather extends Component {
                 //do something
             } )
             .catch(error => {
-                
-
                 console.log('[this is the error] ' + error);
                 this.setState({error: true});
             });
@@ -60,7 +59,7 @@ class Weather extends Component {
 
     render () {
         let forecasts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
-        if (!this.state.error) {
+        if (!this.state.error || this.state.city) {
             forecasts = this.state.forecasts.map(forecast => {
                 const day = moment.unix(forecast.dt);
                 return <Forecast
@@ -77,8 +76,8 @@ class Weather extends Component {
         }
         return (
             <div className="Container">
+             <Search getWeather={this.getWeather}/>
               {forecasts}
-            <Search getWeather={this.getWeather}/>
             </div>
      
         );
