@@ -77,6 +77,7 @@ class Weather extends Component {
         }
         return (
             <div className="Container">
+
              <Search getWeather={this.getWeather}/>
               {forecasts}
             </div>

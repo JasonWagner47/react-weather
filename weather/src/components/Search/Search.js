@@ -8,7 +8,7 @@ class search extends React.Component {
         return (
             <form onSubmit={this.props.getWeather}> 
                 <input type="text" name="city" placeholder="City" defaultValue="Denver"/>
-                <button type="submit"> Get Weatther </button>
+                <button type="submit"> Get Weather </button>
 
             </form>
         );
