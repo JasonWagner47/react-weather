@@ -3,16 +3,31 @@ import React from 'react';
 
 const forecast = (props) => (
 
+    <div className="container">
 
-     <article>
-        <h1>Location: {props.location}</h1>
-        <h1>Day: {props.day}</h1>
-        <h1>Dooms Day: {props.doomsday}</h1>
-        <h1>High: {props.high} </h1>
-        <h1>Low: {props.low}</h1>
-        <h1>Conditions {props.conditions}</h1>
-        <img className="image" src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="weather icon" />
-    </article>
+        <div className="row">
+            <div className="col-md-12">
+                <div>
+                    <h2>
+                        {props.day}
+                        <img className="image" src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="weather icon" />
+                    </h2>
+                </div>
+
+                <div>
+                    High: {props.high}
+                </div>
+
+                <div>
+                    Low: {props.low}
+                </div>
+
+                <div>
+                    Conditions: {props.conditions}
+                </div>
+            </div>
+        </div>
+    </div>
 );
 
 export default forecast;

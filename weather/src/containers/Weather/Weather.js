@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Forecast from '../../components/Forecast/Forecast';
+import Current from '../../components/Current/Current';
 import Search from '../../components/Search/Search';
 import moment from 'moment';
 
@@ -13,6 +14,7 @@ class Weather extends Component {
     state = {
         posts: [],
         forecasts: [],
+        current: [],
         city: null,
         location: '',
         error: false
@@ -28,27 +30,33 @@ class Weather extends Component {
 
         //promise
         .then(response => {
-           
+            console.log(response);
             const posts = response.data.list;
             const location = response.data.city.name;
             const forecasts= [];
+            const current = [];
 
             this.setState({
                 location: location
             });
-            console.log(location);
 
+            //create today's forecast
+            current.push(posts[0]);
+           
+            //create five day and parse out the every three hours 8 * 3 = 24
             for (let i = 0; i < posts.length; i++){
 
                 if (i % 8 === 0){
                     forecasts.push(posts[i]);
-                    
                 } 
             }
 
-            this.setState({forecasts: forecasts});
-                //do something
-            } )
+            this.setState({
+                forecasts: forecasts,
+                current: current
+            });
+            console.log(current);
+            })
             .catch(error => {
                 console.log('[this is the error] ' + error);
                 this.setState({
@@ -60,27 +68,48 @@ class Weather extends Component {
 
     render () {
         let forecasts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+
         if (!this.state.error || this.state.city) {
             forecasts = this.state.forecasts.map(forecast => {
                 const day = moment.unix(forecast.dt);
+
+
                 return <Forecast
-                location={this.state.location}
                 key={forecast.dt}
                 day={day.format('dddd')}
-                doomsday={forecast.main.temp  + 10}
-                high={forecast.main.temp_max} 
-                low={forecast.main.temp_min}
+                high={Math.round(forecast.main.temp_max)} 
+                low={Math.round(forecast.main.temp_min)}
                 conditions={forecast.weather[0].description}
                 icon={forecast.weather[0].icon}/>; 
             });
     
         }
-        return (
-            <div className="Container">
 
-             <Search getWeather={this.getWeather}/>
-              {forecasts}
-            </div>
+        let current = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+
+        if (!this.state.error || this.state.city) {
+            current = this.state.current.map(current => {
+                return <Current
+                key={current.dt}
+                temp={Math.round(current.main.temp)} 
+                conditions={current.weather[0].description}
+                icon={current.weather[0].icon}/>; 
+            });
+    
+        }
+        return (
+                <div>
+                    <Search getWeather={this.getWeather}/>
+                     <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h1>{this.state.location}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    {current}
+                    {forecasts}
+                </div>
      
         );
     }
