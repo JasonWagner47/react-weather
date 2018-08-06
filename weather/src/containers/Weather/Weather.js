@@ -7,11 +7,8 @@ import Search from '../../components/Search/Search';
 import { titleCase } from '../../helpers/helpers';
 
 
-
 const country ='USA';
 const ApiKey = '1c198b3372d8bdb9aa90f8308847b060';
-
-const ERROR_DISPLAY = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
 
 
 class Weather extends Component {
@@ -40,9 +37,9 @@ class Weather extends Component {
             const forecasts= [];
             const current = [];
 
-            // this.setState({
-            //     location: location
-            // });
+            this.setState({
+                location: location
+            });
 
             //create today's forecast
             current.push(posts[0]);
@@ -56,9 +53,8 @@ class Weather extends Component {
             }
 
             this.setState({
-              forecasts: forecasts,
-              current: current,
-              location: location
+                forecasts: forecasts,
+                current: current
             });
             console.log(current);
             })
@@ -72,18 +68,12 @@ class Weather extends Component {
     }
 
     render () {
-        // let forecasts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
-
-        
+        let forecasts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
 
         if (!this.state.error || this.state.city) {
-            const forecasts = this.state.forecasts.map(forecast => {
+            forecasts = this.state.forecasts.map(forecast => {
                 const day = moment.unix(forecast.dt);
 
-                // console.log(forecast.weather[0].description);
-                // const desc = forecast.weather[0].description;
-                // const newDesc = desc.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' '); 
-                // console.log(newDesc);
 
                 return <Forecast
                 key={forecast.dt}
@@ -96,10 +86,10 @@ class Weather extends Component {
     
         }
 
-        // let current = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+        let current = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
 
         if (!this.state.error || this.state.city) {
-            const current = this.state.current.map(current => {
+            current = this.state.current.map(current => {
                 return <Current
                 key={current.dt}
                 temp={Math.round(current.main.temp)} 
@@ -111,7 +101,6 @@ class Weather extends Component {
         return (
                 <div>
                     <Search getWeather={this.getWeather}/>
-                     
                      <div className="container">
                         <div className="row">
                             <div className="col-md-12">
@@ -119,8 +108,8 @@ class Weather extends Component {
                             </div>
                         </div>
                     </div>
-                    {current.length ? current : ERROR_DISPLAY}
-                    {forecasts.length ? forecasts : ERROR_DISPLAY}
+                    {current}
+                    {forecasts}
                 </div>
      
         );
