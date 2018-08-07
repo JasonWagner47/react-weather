@@ -82,19 +82,15 @@ class Weather extends Component {
 
         }
 
+        const current = this.state.current.map(current => {
+            return <Current
+                key={current.dt}
+                temp={Math.round(current.main.temp)}
+                conditions={current.weather[0].description}
+                icon={current.weather[0].icon} />;
+        });
 
-        let current = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
-
-        if (!this.state.error || this.state.city) {
-            current = this.state.current.map(current => {
-                return <Current
-                    key={current.dt}
-                    temp={Math.round(current.main.temp)}
-                    conditions={current.weather[0].description}
-                    icon={current.weather[0].icon} />;
-            });
-
-        }
+        
         return (
             <div>
                 <Search getWeather={this.getWeather} />
