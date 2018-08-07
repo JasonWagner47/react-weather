@@ -10,12 +10,18 @@ body {
   font-family: sans-serif;
 
 }
-.current-weather-wrapper {
-  border-bottom: 1px solid #fff;
-}
 .weather-wrapper {
   color: #fff;
   padding:  2em;
+  max-width: 790px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-family: 'serif';
+  font-style: italic;
+  margin-bottom: 2rem;
 }
 
 .currrent-conditions {
@@ -26,6 +32,7 @@ body {
 }
 
 .five-day-forecast {
+  border-top: 1px solid #fff;
   padding-top: 2rem;
 }
 

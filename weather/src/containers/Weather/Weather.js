@@ -21,12 +21,10 @@ class Weather extends Component {
         error: false
     }
 
-    //toDo lifecycle hook
-    getWeather = async (e) => {
-        e.preventDefault()
-        this.setState({ error: false });
 
-        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + e.target.elements.city.value + ',' + country + '&units=imperial&appid=' + ApiKey)
+    getWeatherByCityName = async (cityName) => {
+        this.setState({ error: false });
+        axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + cityName + ',' + country + '&units=imperial&appid=' + ApiKey)
 
 
             //promise
@@ -61,7 +59,16 @@ class Weather extends Component {
                 });
             });
 
+    }
 
+    //toDo lifecycle hook
+    getWeather = async (e) => {
+        e.preventDefault()
+        this.getWeatherByCityName(e.target.elements.city.value);
+    }
+
+    componentDidMount(){
+        {this.getWeatherByCityName('Denver')}
     }
 
     render() {
@@ -94,16 +101,15 @@ class Weather extends Component {
 
         return (
             <div className="container-fluid weather-wrapper">
-                <div className="directive">React Weather</div>
-                <Search getWeather={this.getWeather} />
-
-                <div className="row current-weather">
-
-                    <div className="col-md-12">
+            <div className="logo">React Weather</div>
+                <div class="row current-weather">
+                    <div className="col-md-4">
                         <h1>{this.state.location}</h1>
                         {current}
                     </div>
-
+                    <div className="col-md-8">
+                        <Search getWeather={this.getWeather} />
+                    </div>
                 </div>
                 <div className="row five-day-forecast">
                     {forecasts}

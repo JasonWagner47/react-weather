@@ -1,12 +1,9 @@
 import React from 'react';
 
-
-
-
 const search = (props) => (
 
-    <div className="row">
-        <div className="col-md-12 p-3">
+
+        <div className="col-md-6 p-3">
             <form className="form-inline" onSubmit={props.getWeather}>
                 <div className="form-group">
                     <label htmlFor="city" className="sr-only">City</label>
@@ -16,7 +13,7 @@ const search = (props) => (
             </form>
 
         </div>
-    </div>
+
 
 );
 
