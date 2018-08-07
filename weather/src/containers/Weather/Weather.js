@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import Forecast from '../../components/Forecast/Forecast';
 import Current from '../../components/Current/Current';
 import Search from '../../components/Search/Search';
-import moment from 'moment';
+import { titleCase } from '../../helpers/helpers';
 
 
 const country = 'USA';
@@ -50,7 +51,7 @@ class Weather extends Component {
                 this.setState({
                     forecasts: five_forecasts,
                     current: first_forecast,
-                    location: input_location 
+                    location: input_location
                 });
             })
             .catch(error => {
@@ -76,7 +77,7 @@ class Weather extends Component {
                     day={day.format('dddd')}
                     high={Math.round(forecast.main.temp_max)}
                     low={Math.round(forecast.main.temp_min)}
-                    conditions={forecast.weather[0].description}
+                    conditions={titleCase(forecast.weather[0].description)}
                     icon={forecast.weather[0].icon} />;
             });
 
@@ -86,13 +87,13 @@ class Weather extends Component {
             return <Current
                 key={current.dt}
                 temp={Math.round(current.main.temp)}
-                conditions={current.weather[0].description}
+                conditions={titleCase(current.weather[0].description)}
                 icon={current.weather[0].icon} />;
         });
 
-        
+
         return (
-            <div>
+            <div className="weather-wrapper">
                 <Search getWeather={this.getWeather} />
                 <div className="container">
                     <div className="row">
@@ -101,8 +102,12 @@ class Weather extends Component {
                         </div>
                     </div>
                 </div>
-                {current}
-                {forecasts}
+                <div className="current-weather">
+                    {current}
+                </div>
+                <div className="five-day-forecast">
+                    {forecasts}
+                </div>
             </div>
 
         );
