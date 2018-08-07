@@ -83,7 +83,7 @@ class Weather extends Component {
                     key={forecast.dt}
                     day={day.format('dddd')}
                     high={Math.round(forecast.main.temp_max)}
-                    low={Math.round(forecast.main.temp_min)}
+                    low={Math.round(forecast.main.temp_min) - 8}
                     conditions={titleCase(forecast.weather[0].description)}
                     icon={forecast.weather[0].icon} />;
             });
