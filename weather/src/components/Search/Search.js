@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const search = (props) => (
-            <div className="container">
+            
                 <div className="row">
                     <div className="col-md-12 p-3">
                             <form className="form-inline" onSubmit={props.getWeather}>
@@ -17,7 +17,7 @@ const search = (props) => (
                        
                     </div>
                 </div>
-            </div>
+           
         );
 
 export default search;

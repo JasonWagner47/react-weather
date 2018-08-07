@@ -93,17 +93,19 @@ class Weather extends Component {
 
 
         return (
-            <div className="weather-wrapper">
+            <div className="container weather-wrapper">
                 <Search getWeather={this.getWeather} />
-                <div className="container current-weather">
-                    <div className="row">
+                
+                
+                <div className="row current-weather">
+                   
                         <div className="col-md-12">
                             <h1>{this.state.location}</h1>
                             {current}
                         </div>
-                    </div>
+                  
                 </div>
-                <div className="five-day-forecast">
+                <div className="row five-day-forecast">
                     {forecasts}
                 </div>
             </div>
