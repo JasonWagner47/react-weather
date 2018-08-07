@@ -15,7 +15,7 @@ body {
 }
 .weather-wrapper {
   color: #fff;
-  margin:  2em;
+  padding:  2em;
 }
 
 .currrent-conditions {
@@ -42,3 +42,4 @@ body {
 .forecast-low, .forecast-high {
   font-size: 0.750em;
 }
+

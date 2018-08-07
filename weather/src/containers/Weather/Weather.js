@@ -23,7 +23,7 @@ class Weather extends Component {
 
     //toDo lifecycle hook
     getWeather = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({ error: false });
 
         axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + e.target.elements.city.value + ',' + country + '&units=imperial&appid=' + ApiKey)
@@ -31,7 +31,6 @@ class Weather extends Component {
 
             //promise
             .then(response => {
-                console.log(response);
                 const data = response.data.list;
                 const input_location = response.data.city.name;
                 const five_forecasts = [];
@@ -61,8 +60,9 @@ class Weather extends Component {
                     location: ''
                 });
             });
-    }
 
+
+    }
 
     render() {
         let forecasts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
@@ -93,17 +93,17 @@ class Weather extends Component {
 
 
         return (
-            <div className="container weather-wrapper">
+            <div className="container-fluid weather-wrapper">
+                <div className="directive">React Weather</div>
                 <Search getWeather={this.getWeather} />
-                
-                
+
                 <div className="row current-weather">
-                   
-                        <div className="col-md-12">
-                            <h1>{this.state.location}</h1>
-                            {current}
-                        </div>
-                  
+
+                    <div className="col-md-12">
+                        <h1>{this.state.location}</h1>
+                        {current}
+                    </div>
+
                 </div>
                 <div className="row five-day-forecast">
                     {forecasts}
