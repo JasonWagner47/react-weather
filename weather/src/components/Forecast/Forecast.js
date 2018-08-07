@@ -3,7 +3,7 @@ import React from 'react';
 
 const forecast = (props) => (
 
-    <div className="container">
+    <div className="container forecast-card">
 
         <div className="row">
             <div className="col-md-12">
@@ -13,7 +13,9 @@ const forecast = (props) => (
                         <img className="image" src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="weather icon" />
                     </h2>
                 </div>
-
+                <div>
+                    {props.conditions}
+                </div>
                 <div>
                     High: {props.high}
                 </div>
@@ -22,9 +24,6 @@ const forecast = (props) => (
                     Low: {props.low}
                 </div>
 
-                <div>
-                    Conditions: {props.conditions}
-                </div>
             </div>
         </div>
     </div>

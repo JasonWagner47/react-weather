@@ -10,8 +10,31 @@ body {
   font-family: sans-serif;
 
 }
-
+.current-weather-wrapper {
+  border-bottom: 1px solid #fff;
+}
 .weather-wrapper {
   color: #fff;
   margin:  2em;
+}
+
+.currrent-conditions {
+  font-size: 1.45em;
+}
+.current-temp{
+  font-size: 5rem;
+}
+
+.five-day-forecast {
+  padding-top: 2rem;
+}
+
+.forecast-card {
+  padding-bottom: 2rem;
+}
+
+.forecast-card h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0;
 }
