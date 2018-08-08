@@ -1,5 +1,7 @@
 # Simple React App Using OpenWeatherAPI
 
+## Installation
+
 ```
 run npm install
 ```
