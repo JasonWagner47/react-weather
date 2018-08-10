@@ -105,7 +105,7 @@ class Weather extends Component {
 
       return (
         <div className="container-fluid weather-wrapper">
-          <div className="logo">React Weather&deg;<</div>
+          <div className="logo">React Weather&deg;</div>
           <div className="row current-weather">
             <div className="col-md-4">
               <h1>{this.state.location}</h1>
