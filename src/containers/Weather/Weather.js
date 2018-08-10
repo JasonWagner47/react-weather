@@ -80,6 +80,7 @@ class Weather extends Component {
       forecasts = this.state.forecasts.map((forecast) => {
         const day = moment.unix(forecast.dt);
 
+        //this is pulling the high and low for every three hours, when the high and low are the same number in such a small window it appears to be a bug. I am pulling the correct data point, but subtracted - 8 for UX prototype
         return (
           <Forecast
             key={forecast.dt}
