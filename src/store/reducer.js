@@ -1,11 +1,15 @@
-
+import * as actionTypes from './actions';
 //using counter state for example only
 
 const intitialState = {
-    counter: 0
+    forecasts: [],
+    current: [],
+    city: null,
+    location: '',
+    error: false
 }
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = intitialState, action) => {
     return state;
 };
 
