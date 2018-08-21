@@ -1,3 +1,5 @@
+// to run Redux POC $ node redux-basics.js
+
 const redux = require ('redux');
 const createStore = redux.createStore;
 const initialState =  {
@@ -28,10 +30,15 @@ const rootReducer = (state = initialState, action) => {
 const store = createStore(rootReducer);
 console.log(store.getState());
 
+
+// Subscription  Comes before dispatching .. getSTate is out of the box
+store.subscribe(() => {
+    console.log('[Subscription', store.getState());
+});
+  
+
 // Action (syntax specific)
 store.dispatch({type: 'INC_COUNTER'});
 store.dispatch({type: 'ADD_COUNTER', value: 10});
 console.log(store.getState());
-
-// Subscription
 
