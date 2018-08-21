@@ -77,8 +77,8 @@ class Weather extends Component {
   render() {
     let forecasts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
 
-    if (!this.state.error || this.state.city) {
-      forecasts = this.state.forecasts.map((forecast) => {
+    if (!this.props.error || this.props.city) {
+      forecasts = this.props.forecasts.map((forecast) => {
         const day = moment.unix(forecast.dt);
 
         //this is pulling the high and low for every three hours, when the high and low are the same number in such a small window it appears to be a bug. I am pulling the correct data point, but subtracted - 8 for UX prototype
@@ -94,7 +94,7 @@ class Weather extends Component {
         );
       });
 
-      const current = this.state.current.map((current) => {
+      const current = this.props.current.map((current) => {
         return (
           <Current
             key={current.dt}
@@ -110,7 +110,7 @@ class Weather extends Component {
           <div className="logo">React Weather&deg;</div>
           <div className="row current-weather">
             <div className="col-md-4">
-              <h1>{this.state.location}</h1>
+              <h1>{this.props.location}</h1>
               {current}
             </div>
             <div className="col-md-8 weather-form">
@@ -135,16 +135,17 @@ class Weather extends Component {
 }
 
 // After the Class it common praactice to create a const called "mapStatetoProps" expects state and returns JS object that maps. It should return key:value states
+// TODO find out best practices on naming convention when converting and returning states to HOC props?
 const mapStateToProps = state => {
   return {
-    psts: state.posts: [],
-    frcsts: state.forecasts: [],
-    crrnt: state.current: [],
-    cty: state.city: null,
-    lction: state.location: '',
-    err: state.error: false,
+    posts: state.posts,
+    forcasts: state.forecast,
+    current: state.current,
+    city: state.city,
+    location: state.location,
+    error: state.error
   };
 };
 
 //for atomic we can tell 'connect' which slice of state and which actions to dispatch
-export default connect()(Weather);
+export default connect( mapStateToProps )(Weather);
