@@ -25,4 +25,6 @@ registerServiceWorker();
 //5. Wrap Provider around the <App/> and pass store={store}
 //6. Write const store = createStore and pass the reducer
 //7. In the container import the component 'connecct' from react-redux
-//7.a Connect is a Higher Order Component
+//7.a Connect is a a function that returns a function that is a Higher Order Component
+//8. Create a const mapStateToProps ... this returns a map of props from a containers state
+//9. In the container pass 'mapStateToProps' in the connect function where the class is exported

@@ -134,5 +134,17 @@ class Weather extends Component {
   }
 }
 
+// After the Class it common praactice to create a const called "mapStatetoProps" expects state and returns JS object that maps. It should return key:value states
+const mapStateToProps = state => {
+  return {
+    psts: state.posts: [],
+    frcsts: state.forecasts: [],
+    crrnt: state.current: [],
+    cty: state.city: null,
+    lction: state.location: '',
+    err: state.error: false,
+  };
+};
+
 //for atomic we can tell 'connect' which slice of state and which actions to dispatch
 export default connect()(Weather);
