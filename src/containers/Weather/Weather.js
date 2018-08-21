@@ -134,4 +134,5 @@ class Weather extends Component {
   }
 }
 
-export default Weather;
+//for atomic we can tell 'connect' which slice of state and which actions to dispatch
+export default connect()(Weather);

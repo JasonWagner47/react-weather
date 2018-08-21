@@ -24,4 +24,5 @@ registerServiceWorker();
 //4. Import the Provider Helper Component 
 //5. Wrap Provider around the <App/> and pass store={store}
 //6. Write const store = createStore and pass the reducer
-//7. In the container import the method 'connecct' from react-redux
+//7. In the container import the component 'connecct' from react-redux
+//7.a Connect is a Higher Order Component
